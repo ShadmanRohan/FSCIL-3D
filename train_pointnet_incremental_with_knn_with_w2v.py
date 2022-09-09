@@ -289,7 +289,7 @@ for t in range(0, args.ntasks):
     
     scheduler = torch.optim.lr_scheduler.StepLR(student_optimizer, step_size=20, gamma=0.5)
     
-    classification_loss = RelationLoss(mat_diff_loss_scale=0.001, num_class=len_cls[t], loss_type=args.loss).to(device)
+    classification_loss = RelationLoss(mat_diff_loss_scale=0.001, num_class=len_cls[t]).to(device)
     
     student_model = train(epochs, student_model, teacher_model, student_optimizer, trainloader, testloader, t, args, sem_train, sem_test)
     
