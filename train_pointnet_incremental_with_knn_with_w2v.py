@@ -46,14 +46,13 @@ feat_class = {} # feature for each class
 
 
 print("cluster 300".upper())
-from with_w2v.pointnet_knn import PointNetCls300 as PointNetCls, PointNet300 as FeatureExtractor
-load_model_path = './saved_models/task_0_cluster_with_w2v.pth' # 'task_0_cluster.pth', 'task_0_without_knn.pth'
+from src.with_w2v.pointnet_knn import PointNetCls300 as PointNetCls, PointNet300 as FeatureExtractor
+load_model_path = '/content/FSCIL-3D/saved_models/task_0_cluster_with_w2v.pth' # 'task_0_cluster.pth', 'task_0_without_knn.pth'
 
 
 print('Load feature extractor model:', load_model_path)
 
-
-centroids = torch.load('./saved_models/centroids/with_w2v/1024x1024_'+args.sim+'.pth')
+centroids = torch.load('/content/FSCIL-3D/saved_models/centroids/with_w2v/1024x1024_'+args.sim+'.pth')
 centroids = centroids.to(device).float()
 centroids = svd_centroid_conversion(centroids)
 
@@ -297,4 +296,4 @@ for t in range(0, args.ntasks):
     print("All task's accuracy:",acc_tasks, "Average:", round(np.mean(acc_tasks),1))
 
 print( "RPD:", round(100*(acc_tasks[0]-acc_tasks[-1])/acc_tasks[0], 1) )
-torch.save(student_model.state_dict(), './with_knn_with_w2v_last_task.pt') 
+torch.save(student_model.state_dict(), './with_knn_with_w2v_last_task.pt')
